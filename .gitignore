@@ -1,50 +1,29 @@
+# --- JAVA / MAVEN ---
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
-
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-### Mac OS ###
-.DS_Store
-
-# Seguridad y Secretos
-.env
-.env.local
+*.class
 *.log
 
-# Si vas a usar Node.js en algún módulo
-node_modules/
+# --- DOCKER ---
+# Ignora la carpeta donde MySQL guarda los datos físicos de pc Hector
+db_data/
 
-# compilados
-*.class
+# --- IDEs ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+nbproject/
+build/
+
+# --- SEGURIDAD Y CONFIGURACIÓN ---
+# credenciales de DBUtil o Docker
+.env
+.env.local
+
+# --- SISTEMA ---
+.DS_Store
+Thumbs.db
