@@ -1,0 +1,25 @@
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: among_us_mysql
+    restart: "no"
+    environment:
+      MYSQL_DATABASE: nave_espacial
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: among_us_pma
+    restart: always
+    depends_on:
+      - mysql_db
+    environment:
+      PMA_HOST: mysql_db
+      PMA_ARBITRARY: 1
+    ports:
+      - "8080:80"
