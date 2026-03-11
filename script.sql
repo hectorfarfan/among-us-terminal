@@ -1,0 +1,22 @@
+CREATE DATABASE IF NOT EXISTS nave_espacial;
+USE nave_espacial;
+CREATE TABLE tripulante(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	rol VARCHAR(20) NOT NULL,
+	vivo BOOLEAN DEFAULT TRUE 
+);
+CREATE TABLE sala(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL UNIQUE,
+	saboteada BOOLEAN DEFAULT FALSE
+);
+CREATE TABLE tarea(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	descripcion VARCHAR(100) NOT NULL,
+	completada BOOLEAN DEFAULT FALSE,
+	id_tripulante INT,
+	FOREIGN KEY (id_tripulante) REFERENCES tripulante (id),
+	id_sala INT,
+	FOREIGN KEY (id_sala) REFERENCES sala (id)
+);
