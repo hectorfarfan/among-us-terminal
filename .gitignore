@@ -9,6 +9,7 @@ db_data/
 
 # --- IDEs ---
 .idea/
+.mvn/
 *.iml
 *.iws
 *.ipr

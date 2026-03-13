@@ -15,7 +15,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: among_us_pma
-    restart: always
+    restart: "no"
     depends_on:
       - mysql_db
     environment:
