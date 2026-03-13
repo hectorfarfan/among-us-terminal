@@ -9,6 +9,7 @@ public class Tarea {
         this.descripcion = descripcion;
         this.tripulanteAsignado = tripulanteAsignado;
         this.sala = sala;
+        this.completada=false;
     }
 
     public Sala getSala() {
