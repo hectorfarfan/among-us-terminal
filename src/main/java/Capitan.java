@@ -1,15 +1,15 @@
 public class Capitan extends Tripulante {
-    public Capitan(String nombre, String rol) {
-        super(nombre, "Capitan");
+
+    public Capitan(String nombre) {
+        super(nombre, "capitan");
     }
 
     @Override
     public void habilidadEspecial() {
-        System.out.println("Puede convocar votaciones.");
+        System.out.println(getNombre() + " puede convocar votaciones de emergencia.");
     }
 
-    public void convocarVotacion(Nave nave){
+    public void convocarVotacion(Nave nave) {
         nave.iniciarVotacion();
     }
-
 }
