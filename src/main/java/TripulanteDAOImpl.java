@@ -6,7 +6,7 @@ public class TripulanteDAOImpl implements TripulanteDAO {
     @Override
     public void insertar(Tripulante tripulante) {
         String sql = "INSERT INTO tripulante (nombre, rol, vivo) VALUES (?, ?, ?)";
-        try (Connection con = DBUtil.getConnection();
+        try (Connection con =  DBUtil.getInstance().getConnection();
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, tripulante.getNombre());
@@ -27,7 +27,7 @@ public class TripulanteDAOImpl implements TripulanteDAO {
     @Override
     public Tripulante obtener(int id) {
         String sql = "SELECT * FROM tripulante WHERE id = ?";
-        try (Connection con = DBUtil.getConnection();
+        try (Connection con =  DBUtil.getInstance().getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
@@ -48,7 +48,7 @@ public class TripulanteDAOImpl implements TripulanteDAO {
         ArrayList<Tripulante> lista = new ArrayList<>();
         String sql = "SELECT * FROM tripulante";
 
-        try (Connection con = DBUtil.getConnection();
+        try (Connection con =  DBUtil.getInstance().getConnection();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -82,7 +82,7 @@ public class TripulanteDAOImpl implements TripulanteDAO {
     @Override
     public void eliminar(int id) {
         String sql = "DELETE FROM tripulante WHERE id = ?";
-        try (Connection con = DBUtil.getConnection();
+        try (Connection con =  DBUtil.getInstance().getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
