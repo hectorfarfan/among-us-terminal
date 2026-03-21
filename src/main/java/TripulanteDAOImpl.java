@@ -65,7 +65,7 @@ public class TripulanteDAOImpl implements TripulanteDAO {
     @Override
     public void actualizar(Tripulante tripulante) {
         String sql = "UPDATE tripulante SET nombre = ?, rol = ?, vivo = ? WHERE id = ?";
-        try (Connection con = DBUtil.getInstance().getconnection();
+        try (Connection con =  DBUtil.getInstance().getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, tripulante.getNombre());
