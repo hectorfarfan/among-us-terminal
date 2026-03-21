@@ -26,7 +26,7 @@ public class DBUtil {
         return instancia;
     }
 
-    public Connection getConexion() {
+    public Connection getConnection() {
         return this.conexion;
     }
 
