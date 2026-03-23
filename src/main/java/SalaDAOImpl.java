@@ -6,9 +6,9 @@ public class SalaDAOImpl implements SalaDAO {
     @Override
     public void insertar(Sala sala) {
         String sql = "INSERT INTO sala (nombre, saboteada) VALUES (?, ?)";
-        try (Connection con =  DBUtil.getInstance().getConnection();
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
+        try {
+            Connection con =  DBUtil.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, sala.getNombre());
             ps.setBoolean(2, sala.isSaboteada());
             ps.executeUpdate();
@@ -26,7 +26,7 @@ public class SalaDAOImpl implements SalaDAO {
     @Override
     public Sala obtener(int id) {
         String sql = "SELECT * FROM sala WHERE id = ?";
-        try (Connection con =  DBUtil.getInstance().getConnection();
+        try (Connection con =  DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
@@ -47,7 +47,7 @@ public class SalaDAOImpl implements SalaDAO {
         ArrayList<Sala> salas = new ArrayList<>();
         String sql = "SELECT * FROM sala";
 
-        try (Connection con =  DBUtil.getInstance().getConnection();
+        try (Connection con =  DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -64,7 +64,7 @@ public class SalaDAOImpl implements SalaDAO {
     @Override
     public void actualizar(Sala sala) {
         String sql = "UPDATE sala SET nombre = ?, saboteada = ? WHERE id = ?";
-        try (Connection con =  DBUtil.getInstance().getConnection();
+        try (Connection con =  DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, sala.getNombre());
@@ -80,7 +80,7 @@ public class SalaDAOImpl implements SalaDAO {
     @Override
     public void eliminar(int id) {
         String sql = "DELETE FROM sala WHERE id = ?";
-        try (Connection con =  DBUtil.getInstance().getConnection();
+        try (Connection con =  DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
