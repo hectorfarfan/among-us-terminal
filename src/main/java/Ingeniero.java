@@ -1,6 +1,6 @@
 public class Ingeniero extends Tripulante {
     public Ingeniero(String nombre, String rol) {
-        super(nombre, "Ingeniero");
+        super(nombre, rol);
     }
 
     @Override

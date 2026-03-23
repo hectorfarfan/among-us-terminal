@@ -1,7 +1,7 @@
 public class Impostor extends Tripulante implements Saboteable {
 
-    public Impostor(String nombre) {
-        super(nombre, "impostor");
+    public Impostor(String nombre,String rol) {
+        super(nombre, rol);
     }
 
     @Override

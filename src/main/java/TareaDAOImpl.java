@@ -6,23 +6,30 @@ public class TareaDAOImpl implements TareaDAO{
     @Override
     public void insertar(Tarea tarea){
         String sqlInsert= "INSERT INTO tarea(descripcion,completada,id_tripulante,id_sala) VALUES (?,?,?,?)";
-        Connection con = DBUtil.getInstance().getConnection();
 
-        try (PreparedStatement pst = con.prepareStatement(sqlInsert)){
+        try (Connection con = DBUtil.getConnection();
+             PreparedStatement pst = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+
             pst.setString(1,tarea.getDescripcion());
             pst.setBoolean(2,tarea.isCompletada());
             pst.setInt(3,tarea.getTripulanteAsignado().getId());
             pst.setInt(4,tarea.getSala().getId());
             pst.executeUpdate();
+
+            ResultSet rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                tarea.setId(rs.getInt(1));
+            }
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error al insertar tarea: " + e.getMessage());
         }
     }
 
     @Override
     public Tarea obtener(int id){
         String sqlRead = "SELECT * FROM tarea WHERE id=?";
-        Connection con = DBUtil.getInstance().getConnection();
+        Connection con = DBUtil.getConnection();
 
         TripulanteDAO tripulanteDAO = new TripulanteDAOImpl();
         SalaDAO salaDAO = new SalaDAOImpl();
@@ -58,7 +65,7 @@ public class TareaDAOImpl implements TareaDAO{
     @Override
     public ArrayList<Tarea> obtenerTodos(){
         String sqlReadAll = "SELECT * FROM tarea";
-        Connection con = DBUtil.getInstance().getConnection();
+        Connection con = DBUtil.getConnection();
 
         ArrayList<Tarea> arrayTarea = new ArrayList<>();
         TripulanteDAO tripulanteDAO = new TripulanteDAOImpl();
@@ -96,7 +103,7 @@ public class TareaDAOImpl implements TareaDAO{
     @Override
     public ArrayList<Tarea> obtenerPorTripulante(int idTrip){
         String sqlRead = "SELECT * FROM tarea WHERE id_tripulante=?";
-        Connection con = DBUtil.getInstance().getConnection();
+        Connection con = DBUtil.getConnection();
 
         ArrayList<Tarea> tareasTripulante = new ArrayList<>();
         TripulanteDAO tripulanteDAO = new TripulanteDAOImpl();
@@ -136,7 +143,7 @@ public class TareaDAOImpl implements TareaDAO{
     @Override
     public void actualizar(Tarea tarea){
         String sqlUpdate = "UPDATE tarea SET descripcion=?, completada=?, id_tripulante=?, id_sala=? WHERE id=?";
-        Connection con = DBUtil.getInstance().getConnection();
+        Connection con = DBUtil.getConnection();
 
         try (PreparedStatement pst = con.prepareStatement(sqlUpdate)) {
 
@@ -162,7 +169,7 @@ public class TareaDAOImpl implements TareaDAO{
     @Override
     public void eliminar(int id){
         String sqlDelete = "DELETE FROM tarea WHERE id = ?";
-        Connection con = DBUtil.getInstance().getConnection();
+        Connection con = DBUtil.getConnection();
 
         try (PreparedStatement pst = con.prepareStatement(sqlDelete)) {
             pst.setInt(1, id);

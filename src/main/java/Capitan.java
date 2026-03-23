@@ -1,7 +1,7 @@
 public class Capitan extends Tripulante {
 
-    public Capitan(String nombre) {
-        super(nombre, "capitan");
+    public Capitan(String nombre,String rol) {
+        super(nombre, rol);
     }
 
     @Override
